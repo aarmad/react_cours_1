@@ -1,5 +1,3 @@
-// Fait avec Claude.ai
-
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type FetchState<T> = {

@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 import { Link } from 'react-router';
 import type { Recipe } from '../types/recipe.types';
 

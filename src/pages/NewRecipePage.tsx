@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 // Écran E — contenu réel branché en partie 4 (formulaire + validation).
 export function NewRecipePage() {
   return (

@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 import type { Difficulty } from './difficulty.types';
 
 export type Recipe = {

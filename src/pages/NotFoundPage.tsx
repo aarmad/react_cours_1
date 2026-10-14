@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 import { Link } from 'react-router';
 
 // Écran F — route "*" : toute URL inconnue.

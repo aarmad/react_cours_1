@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 /** Les trois états génériques d'un écran alimenté par le réseau (écran F). */
 
 export function Loader() {

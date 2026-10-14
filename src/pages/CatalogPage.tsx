@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 import { useMemo, useState } from 'react';
 import { MealTypeFilter, SearchBar, SortSelect } from '../components/CatalogControls';
 import type { SortOption } from '../components/CatalogControls';

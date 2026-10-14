@@ -1,32 +1,56 @@
-# React + TypeScript + Vite
+# MIJOTÉ
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Application de recettes en React 19 + TypeScript, sur l'API publique [DummyJSON](https://dummyjson.com/docs/recipes). Catalogue avec recherche/filtre/tri, fiche recette, liste de courses, authentification et route protégée.
 
-Currently, two official plugins are available:
+## Prérequis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Node.js 24+, npm.
 
-## React Compiler
+## Installation et lancement
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Autres scripts : `npm run build` (build de production, `tsc -b && vite build`), `npm run lint` (oxlint), `npm run preview`.
+
+## Variable d'environnement
+
+`.env` (versionné, ne contient aucun secret) :
+
+```
+VITE_API_BASE_URL=https://dummyjson.com
+```
+
+Seul endroit où l'URL de l'API apparaît en dehors de ce fichier : `src/services/api.ts`, qui la lit via `import.meta.env.VITE_API_BASE_URL` (typée dans `src/vite-env.d.ts`).
+
+## Arborescence
+
+```
+src/
+├── components/   Layout, ProtectedRoute, RequestStates, RecipeList, CatalogControls
+├── pages/        CatalogPage, RecipePage, ShoppingListPage, LoginPage, NewRecipePage, NotFoundPage
+├── hooks/        useFetch, useDebounce
+├── context/      AuthContext, ShoppingListContext
+├── services/     api.ts
+├── types/        Recipe, MealType, Difficulty, AuthUser, NewRecipe, ShoppingListEntry...
+├── App.tsx
+└── main.tsx
+```
+
+## Stockage du jeton d'authentification
+
+Le jeton renvoyé par `/auth/login` est gardé **uniquement en mémoire** (`useState` dans `AuthContext`), jamais dans `localStorage`. Conséquence assumée : un rechargement de page déconnecte l'utilisateur. Choix fait pour cet exercice afin de ne pas exposer le jeton dans le stockage du navigateur ; ça évite aussi d'avoir à le revalider au démarrage via `GET /auth/me` (explicitement un point bonus du sujet, non implémenté ici).
+
+La liste de courses, elle, est persistée dans `localStorage` (voir `ShoppingListContext`) : elle survit au rechargement et à la navigation.
+
+## Limites connues
+
+- Le filtre par type de repas et le tri du catalogue portent sur les résultats déjà reçus (pas de nouvel appel réseau).
+- `POST /recipes/add` simule la création : la recette envoyée n'apparaît jamais réellement dans le catalogue (comportement documenté de l'API de recette, pas un bug).
+- Pas de synchronisation de la recherche avec l'URL (`useSearchParams`) : point bonus du sujet, non implémenté.
+
+## Utilisation de l'IA générative
+
+*(section à compléter : fournisseur et modèle le cas échéant, prompts, justification, adaptations apportées)*

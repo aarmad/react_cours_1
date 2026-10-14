@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 /**
  * Les trois commandes du catalogue (écran A) : recherche, filtre et tri.
  * Trois composants distincts, l'état vit dans CatalogPage.

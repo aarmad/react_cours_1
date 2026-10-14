@@ -1,4 +1,3 @@
-// Fait avec Claude.ai
 export type LoginCredentials = {
   username: string;
   password: string;

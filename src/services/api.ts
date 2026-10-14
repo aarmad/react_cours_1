@@ -1,10 +1,9 @@
-// Fait avec Claude.ai
-
 import type { AuthUser, LoginCredentials } from '../types/loginCredentials.types';
 import type { NewRecipe } from '../types/newrecipe.types';
 import type { Recipe } from '../types/recipe.types';
-export type CreatedRecipe = NewRecipe & { id: number };
 import type { RecipeSearchResponse } from '../types/recipesearchresponse.types';
+
+export type CreatedRecipe = NewRecipe & { id: number };
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
